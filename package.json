@@ -1,0 +1,122 @@
+{
+  "name": "git-scan-fix",
+  "displayName": "Git Scan Fix - Manual Control & Performance",
+  "description": "🚀 Tired of VS Code's Git scanning slowing things down? This tool lets you manually open Git repositories when you need them, solving those annoying file-in-use errors and performance issues. No more automatic scanning - you're in control!",
+  "version": "0.0.1",
+  "publisher": "your-publisher-name",
+  "author": {
+    "name": "Your Name"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/git-repository-manager"
+  },
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Performance",
+    "Other"
+  ],
+  "icon": "resources/icon.png",
+  "galleryBanner": {
+    "color": "#2EA043",
+    "theme": "dark"
+  },
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "git-commands-helper.initGitRepo",
+        "title": "Initialize Repository",
+        "category": "Git Scan Fix",
+        "icon": "$(repo-create)"
+      },
+      {
+        "command": "git-commands-helper.openRepository",
+        "title": "Open Repository (File Picker)",
+        "category": "Git Scan Fix",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "git-commands-helper.openRepositoryFromSelection",
+        "title": "Open Repository (From Workspace)",
+        "category": "Git Scan Fix",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "git-commands-helper.openRepositoryFromPath",
+        "title": "Open Repository (Enter Path)",
+        "category": "Git Scan Fix",
+        "icon": "$(repo)"
+      },
+      {
+        "command": "git-commands-helper.disableGitScanning",
+        "title": "🚀 Fix Git Scanning (Workspace)",
+        "category": "Git Scan Fix",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "git-commands-helper.disableGitScanningGlobally",
+        "title": "🚀 Fix Git Scanning (Global)",
+        "category": "Git Scan Fix",
+        "icon": "$(zap)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "git-commands-helper.openRepositoryFromSelection",
+        "key": "ctrl+shift+g o",
+        "mac": "cmd+shift+g o"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "git-commands-helper.openRepositoryFromSelection",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.96.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.2",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  },
+  "keywords": [
+    "git",
+    "performance",
+    "fix",
+    "scanning",
+    "file-in-use",
+    "cpu",
+    "optimization",
+    "workspace",
+    "speed-up",
+    "git-scanning"
+  ]
+}
