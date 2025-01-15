@@ -157,6 +157,37 @@ Additional Git-related settings you might want to adjust:
 2. Use the "Disable Git Auto-Scanning" command to automatically configure VS Code settings
 3. Use the workspace quick pick for faster access to your project repositories
 
+## Manual Git Refresh
+
+When auto-scanning is disabled, you can manually refresh Git status:
+1. Use the built-in `Git: Refresh` command from the Command Palette
+2. Click the refresh icon in the Source Control panel
+3. Use the keyboard shortcut:
+   - Windows/Linux: `Ctrl+Shift+G R`
+   - Mac: `Cmd+Shift+G R`
+
+This gives you full control over when VS Code updates Git status.
+
+## After Disabling Auto-Scanning
+
+When you disable automatic Git scanning, you'll need to manually refresh Git status. Here are all your options:
+
+### 1. Manual Refresh Options
+- Use `Git: Refresh` command (Ctrl/Cmd + Shift + G R)
+- Click the refresh icon in Source Control panel
+- Run `git status` in terminal
+
+### 2. Alternative Workflows
+- Keep auto-scanning enabled for specific important folders
+- Use workspace-specific settings instead of global disable
+- Set up task automation for periodic Git status updates
+
+### 3. Best Practices
+- Refresh before important Git operations
+- Use Source Control panel indicators
+- Check status manually when switching branches
+- Configure per-folder settings for critical projects
+
 ## Performance Benefits
 
 - No continuous background scanning
