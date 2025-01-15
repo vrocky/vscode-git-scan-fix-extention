@@ -198,4 +198,4 @@ When you disable automatic Git scanning, you'll need to manually refresh Git sta
 
 ## Contributing
 
-Feel free to file issues and submit PRs on our [GitHub repository](your-repo-url).
+Feel free to file issues and submit PRs on our [GitHub repository](https://github.com/vrocky/vscode-git-scan-fix-extention).
