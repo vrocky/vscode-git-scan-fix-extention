@@ -228,6 +228,108 @@ class GitRepositoryManager {
     }
 
     /**
+     * Refreshes all Git repositories
+     */
+    public static async refreshAllRepositories(): Promise<void> {
+        try {
+            const gitExtension = await this.getGitExtension();
+            const api = gitExtension.exports.getAPI(1) as API;
+
+            for (const repo of api.repositories) {
+                await vscode.commands.executeCommand('git.refresh', repo.rootUri);
+            }
+
+            vscode.window.showInformationMessage('All repositories refreshed successfully');
+        } catch (error) {
+            this.handleError('Failed to refresh repositories', error);
+        }
+    }
+
+    /**
+     * Adds all Git repositories from a given directory
+     * @param dirPath Directory path to scan for repositories
+     */
+    public static async addRepositoriesFromDirectory(dirPath?: string): Promise<void> {
+        try {
+            await this.getGitExtension();
+
+            if (!dirPath) {
+                const defaultUri = vscode.workspace.workspaceFolders?.[0]?.uri || vscode.Uri.file(os.homedir());
+                const result = await vscode.window.showOpenDialog({
+                    canSelectFiles: false,
+                    canSelectFolders: true,
+                    canSelectMany: false,
+                    defaultUri,
+                    title: 'Select Directory to Scan for Git Repositories'
+                });
+
+                if (!result?.[0]) return;
+                dirPath = result[0].fsPath;
+            }
+
+            const allRepos = await this.getAllGitRepositories(dirPath);
+
+            if (!allRepos.length) {
+                throw new Error('No Git repositories found in the selected directory');
+            }
+
+            for (const repoPath of allRepos) {
+                await vscode.commands.executeCommand('git.openRepository', repoPath);
+            }
+
+            vscode.window.showInformationMessage(`Added ${allRepos.length} repositories from ${dirPath}`);
+        } catch (error) {
+            this.handleError('Failed to add repositories from directory', error);
+        }
+    }
+
+    /**
+     * Adds all Git repositories from a manually entered path
+     */
+    public static async addRepositoriesFromPath(): Promise<void> {
+        try {
+            await this.getGitExtension();
+
+            const dirPath = await vscode.window.showInputBox({
+                prompt: 'Enter the full path to the directory to scan for Git repositories',
+                placeHolder: 'e.g., C:\\Users\\username\\projects',
+                validateInput: async (value) => {
+                    if (!value) return 'Path is required';
+                    try {
+                        const stats = await fs.promises.stat(value);
+                        if (!stats.isDirectory()) {
+                            return 'Not a valid directory';
+                        }
+                    } catch {
+                        return 'Not a valid directory';
+                    }
+                    return null;
+                }
+            });
+
+            if (dirPath) {
+                await this.addRepositoriesFromDirectory(dirPath);
+            }
+        } catch (error) {
+            this.handleError('Failed to add repositories from path', error);
+        }
+    }
+
+    /**
+     * Toggles the keybindings for the extension
+     */
+    public static async toggleKeybindings(): Promise<void> {
+        try {
+            const config = vscode.workspace.getConfiguration('git-commands-helper');
+            const currentSetting = config.get<boolean>('enableKeybindings', true);
+            await config.update('enableKeybindings', !currentSetting, vscode.ConfigurationTarget.Global);
+            vscode.window.showInformationMessage(`Keybindings ${!currentSetting ? 'enabled' : 'disabled'} successfully. Please restart VS Code for changes to take effect.`);
+        } catch (error) {
+            this.handleError('Failed to toggle keybindings', error);
+        }
+    }
+
+    /**
      * Handles errors consistently across the extension
      */
     private static handleError(message: string, error: unknown): void {
@@ -238,6 +340,9 @@ class GitRepositoryManager {
 }
 
 export function activate(context: vscode.ExtensionContext) {
+    const config = vscode.workspace.getConfiguration('git-commands-helper');
+    const enableKeybindings = config.get<boolean>('enableKeybindings', false);
+
     const subscriptions = [
         vscode.commands.registerCommand('git-commands-helper.initGitRepo', () => 
             GitRepositoryManager.initRepository()),
@@ -250,9 +355,18 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('git-commands-helper.disableGitScanning', () => 
             GitRepositoryManager.disableGitScanning()),
         vscode.commands.registerCommand('git-commands-helper.disableGitScanningGlobally', () => 
-            GitRepositoryManager.disableGitScanningGlobally())
+            GitRepositoryManager.disableGitScanningGlobally()),
+        vscode.commands.registerCommand('git-commands-helper.refreshAllRepositories', () => 
+            GitRepositoryManager.refreshAllRepositories()),
+        vscode.commands.registerCommand('git-commands-helper.addRepositoriesFromDirectory', () => 
+            GitRepositoryManager.addRepositoriesFromDirectory()),
+        vscode.commands.registerCommand('git-commands-helper.addRepositoriesFromPath', () => 
+            GitRepositoryManager.addRepositoriesFromPath()),
+        vscode.commands.registerCommand('git-commands-helper.toggleKeybindings', () => 
+            GitRepositoryManager.toggleKeybindings())
     ];
 
+    // Remove the enableKeybindings block since these commands are already registered above
     context.subscriptions.push(...subscriptions);
 }
 

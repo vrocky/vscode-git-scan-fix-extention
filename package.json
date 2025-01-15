@@ -27,6 +27,16 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "git-commands-helper.enableKeybindings": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable default keybindings for Git Commands Helper."
+        }
+      }
+    },
     "commands": [
       {
         "command": "git-commands-helper.initGitRepo",
@@ -63,13 +73,56 @@
         "title": "🚀 Fix Git Scanning (Global)",
         "category": "Git Scan Fix",
         "icon": "$(zap)"
+      },
+      {
+        "command": "git-commands-helper.refreshAllRepositories",
+        "title": "Refresh All Repositories",
+        "category": "Git Scan Fix",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "git-commands-helper.addRepositoriesFromDirectory",
+        "title": "Add Repositories from Directory",
+        "category": "Git Scan Fix",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "git-commands-helper.addRepositoriesFromPath",
+        "title": "Add Repositories from Path",
+        "category": "Git Scan Fix",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "git-commands-helper.toggleKeybindings",
+        "title": "Toggle Keybindings",
+        "category": "Git Scan Fix",
+        "icon": "$(settings-gear)"
       }
     ],
     "keybindings": [
       {
         "command": "git-commands-helper.openRepositoryFromSelection",
-        "key": "ctrl+shift+g o",
-        "mac": "cmd+shift+g o"
+        "key": "ctrl+alt+g o",
+        "mac": "cmd+alt+g o",
+        "when": "config.git-commands-helper.enableKeybindings"
+      },
+      {
+        "command": "git-commands-helper.refreshAllRepositories",
+        "key": "ctrl+alt+g r",
+        "mac": "cmd+alt+g r",
+        "when": "config.git-commands-helper.enableKeybindings"
+      },
+      {
+        "command": "git-commands-helper.addRepositoriesFromDirectory",
+        "key": "ctrl+alt+g d",
+        "mac": "cmd+alt+g d",
+        "when": "config.git-commands-helper.enableKeybindings"
+      },
+      {
+        "command": "git-commands-helper.addRepositoriesFromPath",
+        "key": "ctrl+alt+g p",
+        "mac": "cmd+alt+g p",
+        "when": "config.git-commands-helper.enableKeybindings"
       }
     ],
     "menus": {
