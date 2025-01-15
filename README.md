@@ -134,13 +134,13 @@ Additional Git-related settings you might want to adjust:
   - Direct Path Entry: Enter the repository path manually
 - **Initialize New Repositories**: Quick command to initialize Git in current folder
 
-## Why Use This Instead of VS Code's Built-in Git?
+## Why Use This Extension?
 
-1. **Keep VS Code's Git Features**: You still get all the great Git and GitHub Copilot features
-2. **Control When to Scan**: Only scan for repositories when you explicitly want to
-3. **Better Performance**: No background processes constantly checking your directories
-4. **Simple Workflow**: Quick commands to open repositories when needed
-5. **Works Alongside**: Use both this extension and VS Code's Git features together
+1. **Keep VS Code's Git Features**: You still get all the great Git and GitHub Copilot features.
+2. **Control When to Scan**: Only scan for repositories when you explicitly want to.
+3. **Better Performance**: No background processes constantly checking your directories.
+4. **Simple Workflow**: Quick commands to open repositories when needed.
+5. **Works Alongside**: Use this extension in conjunction with VS Code's built-in Git features for enhanced control and performance.
 
 ## 🛠️ Commands
 
