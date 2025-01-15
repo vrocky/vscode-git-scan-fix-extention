@@ -2,7 +2,7 @@
   "name": "git-scan-fix",
   "displayName": "Git Scan Fix - Manual Control & Performance",
   "description": "🚀 Tired of VS Code's Git scanning slowing things down? This tool lets you manually open Git repositories when you need them, solving those annoying file-in-use errors and performance issues. No more automatic scanning - you're in control!",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "vrocky",
   "author": {
     "name": "Vinit"

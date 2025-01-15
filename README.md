@@ -199,3 +199,63 @@ When you disable automatic Git scanning, you'll need to manually refresh Git sta
 ## Contributing
 
 Feel free to file issues and submit PRs on our [GitHub repository](https://github.com/vrocky/vscode-git-scan-fix-extention).
+
+# Git Commands Helper
+
+A VS Code extension that provides helpful Git repository management commands.
+
+## Features
+
+This extension adds several commands to help manage Git repositories in VS Code:
+
+### Git Repository Management
+
+* `git-commands-helper.initGitRepo`: Initialize a new Git repository
+* `git-commands-helper.openRepository`: Open a Git repository by browsing
+* `git-commands-helper.openRepositoryFromSelection`: Open a Git repository from workspace
+* `git-commands-helper.openRepositoryFromPath`: Open a Git repository from manual path input
+* `git-commands-helper.disableGitScanning`: Disable Git auto-scanning in workspace
+* `git-commands-helper.disableGitScanningGlobally`: Disable Git auto-scanning globally
+* `git-commands-helper.refreshAllRepositories`: Refresh all Git repositories
+* `git-commands-helper.addRepositoriesFromDirectory`: Add all Git repositories from a directory
+* `git-commands-helper.addRepositoriesFromPath`: Add Git repositories from manual path input
+* `git-commands-helper.toggleKeybindings`: Toggle extension keybindings
+
+## Default Keybindings
+
+* Initialize Git Repository: `Ctrl+Alt+G I`
+* Open Repository: `Ctrl+Alt+G O`
+* Open Repository from Selection: `Ctrl+Alt+G S`
+* Open Repository from Path: `Ctrl+Alt+G P`
+* Disable Git Scanning (Workspace): `Ctrl+Alt+G D`
+* Disable Git Scanning (Global): `Ctrl+Alt+G G`
+* Refresh All Repositories: `Ctrl+Alt+G R`
+* Add Repositories from Directory: `Ctrl+Alt+G A`
+* Add Repositories from Path: `Ctrl+Alt+G M`
+* Toggle Keybindings: `Ctrl+Alt+G T`
+
+Keybindings can be enabled/disabled using the `git-commands-helper.toggleKeybindings` command.
+
+## Extension Settings
+
+This extension contributes the following settings:
+
+* `git-commands-helper.enableKeybindings`: Enable/disable keyboard shortcuts (default: true)
+
+## Requirements
+
+* Visual Studio Code 1.80.0 or higher
+* Git extension for VS Code must be installed
+
+## Known Issues
+
+No known issues at this time.
+
+## Release Notes
+
+### 1.0.0
+
+Initial release of Git Commands Helper
+- Added Git repository management commands
+- Added keybinding support
+- Added workspace and global Git scanning controls
